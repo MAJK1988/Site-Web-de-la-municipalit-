@@ -1,0 +1,183 @@
+/* BASIC STYLES */
+
+/*----NavigationBar----*/
+
+
+#nav-bar{
+  background-color: #007bff;
+}
+
+.navbar-brand img
+{
+	height: 80px;
+	width: 80px;
+	padding-left: 10px;
+}
+
+
+#nav-bar a{
+  padding-right: 50px;
+
+	
+}
+#nav-bar a:hover
+{
+	color: #007bff!important;
+	}
+
+.navbar-toggler
+{
+	border:none;
+}
+.nav-link{
+	color: #555!important;
+	font-weight: 600;
+	font-size: 16px;
+}
+/*body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+
+  header {
+    width: 100%;
+  }
+  
+
+  
+
+  
+  /* GOOGLE AREA */
+  .google #google_logo {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+   
+    clear: both;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  img{
+      width: 150px;
+  }
+  /*----- form------*/
+  .form {
+    text-align: center;
+  }
+
+  
+  .form #name, #fathername, #family, #searchbt, #propretyId, #lane, #roomnumber, #area {   
+    text-align: center;
+    height: 40px;
+    color: rgb(7, 0, 0);
+    background-color: rgb(234, 237, 241);
+    font-size: 16px;
+    border-radius: 8px;
+    border:none;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    min-width: 100px;
+  }
+
+  .form #area:hover {
+    cursor: pointer;
+    background-color:skyblue;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);     
+  }
+
+  .form #roomnumber:hover {
+    cursor: pointer;
+    background-color:skyblue;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);     
+  }
+
+  .form #lane:hover {
+    cursor: pointer;
+    background-color:skyblue;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);     
+  }
+
+  .form #propretyId:hover {
+    cursor: pointer;
+    background-color:skyblue;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);     
+  }
+
+  .form #name:hover {
+    cursor: pointer;
+    background-color:skyblue;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);     
+  }
+  .form #fathername:hover {
+    cursor: pointer;
+    background-color:skyblue;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);     
+  }
+  .form #family:hover {
+    cursor: pointer;
+    background-color:skyblue;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);     
+  }
+
+  .form #searchbt:hover {
+    cursor: pointer;
+    
+    background-color:skyblue;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);     
+  }
+
+
+  .search-bottun
+  {
+    text-align: center;
+  }
+  
+  
+  .search-bottun #search{
+    height:45px ;
+    width: 100px;
+    text-align: center;
+    font-size: large;
+    border-radius: 8px;
+    margin-top: 5px;
+    
+  
+    }
+    .search-bottun #search:hover {
+    cursor: pointer;
+    background-color:rgb(221, 214, 214);;
+    }
+
+
+  
+  .price-content{
+   text-align: right;
+    width: 100%;
+    padding-top: 100px;
+  
+  
+  }
+
+  
+   
+  .price-content h2:hover{
+    cursor: pointer;
+      color: #007bff!important;
+      
+   
+   }
+
+   ul p{
+     padding-bottom: 10px;
+   }
+   #list{
+     margin: auto; width: 60%; padding: 10px;
+   }
+
+ 
+
+

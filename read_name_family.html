@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>  
+       <link rel="stylesheet" type="text/css" href="style.css">
+
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+     <script src="https://printjs-4de6.kxcdn.com/print.min.css"></script>
+    
+    </head>
+        <body>
+
+                            <!----NavigationBar---->
+                            
+	<section id="nav-bar" dir="rtl"><nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><img src="MinicipalityAkkarEntry.jpg"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              إضافة
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item"  onclick='gotoInsertOne()'>إضافة مواطن</a>
+            
+          </div>
+        </li>
+        
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            تعديل
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" onclick='GoToEdit("read_name_family")'> تأكد من المواطن</a>
+          </div>
+        </li>
+   
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            بحث
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" onclick='GoToSearch("read_propretyID")' >بحث عن عقار</a>
+            <a class="dropdown-item" onclick='GoToSearch("read_lane_familyname")'>بحث عن عائلة</a>
+            <a class="dropdown-item" onclick='GoToSearch("search_room_number")' >بحث حسب عدد الاقصى للغرف</a>
+            <a class="dropdown-item" onclick='GoToSearch("search_area")'>بحث حسب المساحة</a>
+            <a class="dropdown-item" onclick='GoToSearch("search_type")'>بحث عن محلات</a>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" onclick="signOut()"> تسجيل خروج <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" onclick="gotoPrint()"> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+            <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+            <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+          </svg>
+             <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link"  href="welcome.html"> صفحة رئيسية <span class="sr-only">(current)</span></a>
+        </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
+</section>
+
+
+<section id="printJS-form">      
+<div dir="rtl" class="form">
+
+            <input type="txet" id="name" placeholder="أدخل الاسم" class="classname">
+            <input type="txet" id="fathername" placeholder="أدخل الاسم الاب" class="classname">
+            <select id="Family" class="classname"> 
+              <option>حدد أسم العائلة</option>
+           </select>
+
+            <button type="button" id="searchbt"  onclick="SearchNameFamilly()" >
+                إبحث</button>
+        </div>
+      </section> 
+
+      <section>
+      
+     </button>
+    </section> 
+    
+        <script>
+             var firebaseConfig = {
+                apiKey: "AIzaSyAhDWK3oR13VkcOb7g0jYPexSDbPgQ9c0w",
+                authDomain: "akkardata-7767e.firebaseapp.com",
+                databaseURL: "https://akkardata-7767e-default-rtdb.firebaseio.com",
+                projectId: "akkardata-7767e",
+                storageBucket: "akkardata-7767e.appspot.com",
+                messagingSenderId: "912329878632",
+                appId: "1:912329878632:web:d244a3faabf35827a2dfdd",
+                measurementId: "G-R4GRY4BX4H"
+              };
+              // Initialize Firebase
+              firebase.initializeApp(firebaseConfig);
+              
+
+            $(document ).ready(function() {
+
+             if(CheckInternetConnection()){
+              GetFamilyName();
+              ChekAuth();
+              ChekTypeOperation();}
+                          
+            });        
+        </script>
+            <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+
+    </body>
+</html>

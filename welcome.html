@@ -1,0 +1,155 @@
+
+<html>
+<head>
+    <title>Homepage</title>
+   
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <!-- Firebase -->
+    
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+     <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+
+  </head>
+  
+  <body>
+
+    <!----NavigationBar---->
+    <section id="nav-bar" dir="rtl"><nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"><img src="MinicipalityAkkarEntry.jpg"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                إضافة
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item"  onclick='gotoInsertOne()'>إضافة مواطن</a>
+              
+            </div>
+          </li>
+         
+        
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              تعديل
+            </a>
+  
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" onclick='GoToEdit("read_name_family")'>بحث عن مواطن</a>
+              <a class="dropdown-item" onclick='GoToEdit("read_lane_familyname")'>بحث عن عائلة</a>
+              <a class="dropdown-item" onclick='GoToEdit("read_propretyID")' >بحث عن عقار</a>
+            </div>
+          </li>
+        
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              بحث
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="read_name_family.html">بحث عن مواطن</a>
+              <a class="dropdown-item" href="read_propretyID.html">بحث عن عقار</a>
+              <a class="dropdown-item" href="read_lane_familyname.html">بحث عن عائلة</a>
+              <a class="dropdown-item" href="search_room_number.html">بحث حسب عدد الاقصى للغرف</a>
+              <a class="dropdown-item" href="search_area.html">بحث حسب المساحة</a>
+              <a class="dropdown-item" href="search_type.html">بحث عن محلات</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signOut()"> تسجيل خروج <span class="sr-only">(current)</span></a>
+          </li>
+         
+        </ul>
+      </div>
+    </nav>
+  </section>
+  
+  
+
+
+    
+    <!-- GOOGLE IMG -->  
+    <div class="google">
+      <a href="#" id="google_logo"><img src="MinicipalityAkkarEntry.jpg"/></a>
+    </div>
+    
+    <!-- FORM SEARCH -->  
+    <div class="form" dir="rtl">  
+      <form>
+        <a class="nav-link"   onclick=' 
+        window.sessionStorage.setItem("DataSend","");
+        GoToSearch("DataEntry")'
+        style="width:150px; background-color: rgb(181, 197, 197);
+        margin-left: auto; margin-right: auto; border-radius: 5px; margin-bottom: 20px; font-size: larger;"
+        >إضافة <span class="sr-only">(current)</span></a>
+  
+        <a class="nav-link" href="read_name_family.html" 
+        style="width:150px; background-color: rgb(181, 197, 197);
+        margin-left: auto; margin-right: auto; border-radius: 5px; margin-bottom: 20px; font-size: larger;">
+         بحث <span class="sr-only">(current)</span></a>
+        
+       
+
+        
+     
+    </div>  
+    
+
+    <script>
+      // Your web app's Firebase configuration
+   var firebaseConfig = {
+      apiKey: "AIzaSyAhDWK3oR13VkcOb7g0jYPexSDbPgQ9c0w",
+      authDomain: "akkardata-7767e.firebaseapp.com",
+      databaseURL: "https://akkardata-7767e-default-rtdb.firebaseio.com",
+      projectId: "akkardata-7767e",
+      storageBucket: "akkardata-7767e.appspot.com",
+      messagingSenderId: "912329878632",
+      appId: "1:912329878632:web:d244a3faabf35827a2dfdd",
+      measurementId: "G-R4GRY4BX4H"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    
+      
+    
+      $(document ).ready(function() {
+        if(CheckInternetConnection()){
+             
+              ChekAuth();
+        }
+             
+            });
+
+    </script>
+    
+    
+    
+    
+        <!-- Custom JavaScript -->
+        <script src="app.js"></script>
+    
+    
+      
+         
+  </body>
+  </html>

@@ -1,0 +1,189 @@
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script> 
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+ <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.css"></script>
+
+<style>
+
+table, th, td {
+  
+  border: 2px solid rgb(17, 17, 17);
+}
+th {
+    font-size: 18px;
+    font: 1.3em sans-serif;
+    padding: 5px;
+    color: black;
+    background-color: beige;
+
+}
+table {
+  border-collapse: collapse;
+  width: 95%;
+  table-layout: auto;
+  margin: 0 auto;
+  text-align: center;
+}
+</style>
+
+</head>
+<body id='printJS-form' >
+
+    <div   dir="rtl" class="row">
+        <h3 style="margin-right: 60px;
+        margin-bottom: 30px;
+        margin-top: 30px;">
+        الجمهورية البنانية- وزارة الداخلية و البلديات-بلدية عكار العتيقة
+     </h3>
+
+   
+
+   </div>
+    <p id='date' dir="rtl"></p>
+
+  <table calss="table table-striped" id="table" dir="rtl"> 
+  </table>
+  
+  
+
+
+    <script>
+
+
+
+var firebaseConfig = {
+               apiKey: "AIzaSyDmPgwpQhjeXA1tPHF0y3vOU2mOjQhi6F0",
+               authDomain: "municipalityakkaralatika.firebaseapp.com",
+               databaseURL:"https://municipalityakkaralatika-default-rtdb.firebaseio.com/",
+               projectId: "municipalityakkaralatika",
+              storageBucket: "municipalityakkaralatika.appspot.com",
+              messagingSenderId: "192697764497",
+              appId: "1:192697764497:web:25351366b222690c0c8d30",
+              measurementId: "G-BP45DLWVM3"
+               };
+            // Initialize Firebase
+            
+            
+            firebase.initializeApp(firebaseConfig);  
+
+
+$(document ).ready(function() {
+//get storage
+    var data = {
+ getUserDataFromSession: function() {
+     
+     return  window.sessionStorage.getItem('DataHello');
+ }  }
+
+ var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    //addTextTohtmlPage('date','تاريخ', mm + '/' + dd + '/' + yyyy);
+ 
+
+
+ output = document.getElementById('output');
+var table=document.getElementById('table');
+
+
+ var tr=document.createElement('tr');
+ var td=document.createElement('td');
+ td.colSpan='9';
+ td.innerHTML='معلومات عن المالك';
+
+ var td1=document.createElement('td');
+ td1.colSpan='9';
+ td1.innerHTML='معلومات عن البناء';
+
+ tr.appendChild(td);
+ tr.appendChild(td1);
+ table.appendChild(tr);
+
+
+
+
+
+
+  constructTable(JSON.parse(JSON.parse(data.getUserDataFromSession())),table);
+  printJS({ printable: 'printJS-form', type: 'html'})
+  
+
+
+});
+
+function addTextTohtmlPage(id,text){
+             var paragraph = document.getElementById(id);
+             var textAdd = document.createTextNode(text);
+             paragraph.appendChild(textAdd);
+             }
+ //output.innerHTML = PrintHtml(JSON.parse(JSON.parse(data.getUserDataFromSession())));
+
+function constructTable(list,selector) { 
+              
+              // Getting the all column names 
+              var cols = headers(list, selector);   
+     
+              // Traversing the JSON data 
+              for (var i = 0; i < list.length; i++) { 
+                  var row = $('<tr/>');    
+                  for (var colIndex = 0; colIndex < cols.length; colIndex++) 
+                  { 
+                      var val = list[i][cols[colIndex]]; 
+                        
+                      // If there is any key, which is matching 
+                      // with the column name 
+                      if (val == null) val = "";   
+                          row.append($('<td/>').html(val)); 
+                  } 
+                    
+                  // Adding each row to the table 
+                  $(selector).append(row); 
+              } 
+          } 
+            
+          function headers(list, selector) { 
+              var columns = []; 
+              var header = $('<tr/>'); 
+                
+              for (var i = 0; i < list.length; i++) { 
+                  var row = list[i]; 
+                    
+                  for (var k in row) { 
+                      if ($.inArray(k, columns) == -1) { 
+                          columns.push(k); 
+                            
+                          // Creating the header 
+                          header.append($('<th/>').html(k)); 
+                      } 
+                  } 
+              } 
+                
+              // Appending the header to the table 
+              $(selector).append(header); 
+                  return columns; 
+          }        
+
+
+
+    </script>
+ <script src="app.js"></script>
+
+
+</body>
+
+</html>

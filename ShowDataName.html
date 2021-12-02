@@ -1,0 +1,156 @@
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            body{
+                margin: auto;
+             width: 50%;
+             border: 2px solid black;
+             padding: 10px;
+             margin-top: 10px;
+             margin-bottom: 10px;
+            }
+            .tiltlepage{
+        
+        /*border: 4px dotted blue;
+        border-radius: 20px;*/
+       
+        margin-left: 5px;
+        margin-right: 5px;
+         }
+
+         p{
+             margin-right: 60px;
+             font-size: 26px;
+         }
+         h4{
+            margin-right: 60px;
+            
+            font-style:italic;
+         }
+         h3{
+            margin-right: 50px;
+            
+            text-align: right;
+            
+            font-style:italic;
+         }
+         h4::after 
+         {
+             content: '';
+             background:black;
+             display: block;
+             height: 3px;
+             width: 220px;
+             margin: 10px auto 5px;
+            }
+
+        </style>
+
+    </head>
+    <body >
+
+        <div >
+            <h3 >
+            الجمهورية البنانية
+            </h3>
+         <h3 >
+            وزارة الداخلية و البلديات
+         </h3>
+         <h3 style="margin-bottom: 50px;">
+            بلدية عكار العتيقة
+         </h3>
+       </div>
+
+
+        <div dir="rtl" class="row">
+           <h4 id='nameTitle'>  معلومات عن المالك</h4>
+          </div>
+
+        <div dir="rtl"  class="row" >
+            
+        <p id='name' > الأسم الثلاثي :  </p>
+        <p id='registerId'>رقم السجل:  </p>
+        <p id='DateOfBirth'> تاريخ الميلاد:  </p>
+        <p id='tle03'> تلفون محمول:  </p>
+        <p id='tle06'> تلفون ثابت:  </p>
+               
+        </div>
+        <div dir="rtl" class="row">
+            <h4 id='nameTitle'>  معلومات عن العقار</h4>
+           </div>
+ 
+         <div dir="rtl"  class="row" >
+             
+        <p id='Lane' > الحي:  </p>
+         <p id='IdProprty' > رقم العقار:  </p>
+         <p id='Divider'> المقسم: </p>
+         <p id='Block'> بلوك:   </p>
+         <p id='Floor'> طابق:   </p>
+         <p id='RoomNumber'> عدد الغرفة:    </p>
+         <p id='Area'> مساحة:    </p>
+         <p id='using'> نوع:   </p>
+         <p id='UnpaidYears'> عدد سنوات الغير مدفوعة:  </p>
+           
+         </div>
+         <p id='date'> تاريخ:   </p>   
+         <p > ..........................:توقيع</p>   
+        
+
+        <script>
+            var userData;
+             $(document ).ready(function() {
+                var data = {
+            getUserDataFromSession: function() {
+                
+                return  window.sessionStorage.getItem('DataSend');
+            }  }
+             console.log(data.getUserDataFromSession());
+            userData=JSON.parse(JSON.parse(data.getUserDataFromSession()));
+
+            console.log(userData.UserData[0].name);
+            addTextTohtmlPage("name",userData.UserData[0].name+' '+ userData.UserData[0].fatherName+' '+ userData.UserData[0].family);
+            addTextTohtmlPage("registerId",userData.UserData[0].RecordNumber);
+            addTextTohtmlPage("DateOfBirth",userData.UserData[0].birthdate);
+            addTextTohtmlPage("tle03",userData.UserData[0].tel03);
+            addTextTohtmlPage("tle06",userData.UserData[0].tel06);
+
+            addTextTohtmlPage("Lane",userData.UserData[0].Lane);
+            addTextTohtmlPage("IdProprty",userData.UserData[0].PropertyID);
+            addTextTohtmlPage("Divider",userData.UserData[0].Divider);
+            addTextTohtmlPage("Block",userData.UserData[0].block);
+            addTextTohtmlPage("Floor",userData.UserData[0].floor);
+            addTextTohtmlPage("UnpaidYears",userData.UserData[0].NumberYearUnpaid);
+            addTextTohtmlPage("RoomNumber",userData.UserData[0].numberroom);
+            addTextTohtmlPage("Area",userData.UserData[0].area);
+            addTextTohtmlPage("using",userData.UserData[0].using);
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            addTextTohtmlPage("date",mm + '/' + dd + '/' + yyyy);
+
+
+             });
+
+             function addTextTohtmlPage(id,text){
+                var paragraph = document.getElementById(id);
+             var textAdd = document.createTextNode(text);
+             paragraph.appendChild(textAdd);
+             }
+             
+
+        </script>
+    </body>
+
+
+
+</html>
